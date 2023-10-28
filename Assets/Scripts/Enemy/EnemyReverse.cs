@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class EnemyNormal : Enemy
+    public class EnemyReverse : Enemy
     {
         [Title("没被吸时")]
         public float normalAcceleration;
@@ -16,7 +16,7 @@ namespace Enemy
         [Title("被推")] 
         public float pushForce;
 
-        protected override void NotBeingSuckedIn()
+        protected override void BeingSuckedIn()
         {
             if (Rb.velocity.magnitude < normalMaxSpeed ||
                 Rb.velocity.x * Direction.x < 0 || Rb.velocity.y * Direction.y < 0)
@@ -29,7 +29,7 @@ namespace Enemy
             }
         }
 
-        protected override void BeingSuckedIn()
+        protected override void NotBeingSuckedIn()
         {
             if (Rb.velocity.magnitude < suckedMaxSpeed ||
                 Rb.velocity.x * -Direction.x < 0 || Rb.velocity.y * -Direction.y < 0)

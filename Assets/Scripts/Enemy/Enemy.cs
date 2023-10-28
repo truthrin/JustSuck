@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Hmxs.Toolkit.Module.Events;
+using Sucker;
+using UnityEngine;
 
 namespace Enemy
 {
@@ -6,19 +8,31 @@ namespace Enemy
     public abstract class Enemy : MonoBehaviour
     {
         protected Rigidbody2D Rb;
-        protected Transform Player;
+        protected Transform Sucker;
+        protected Vector2 Direction;
         
         private bool _isBeingSuckedIn;
+
+        private void OnEnable()
+        {
+            Events.AddListener(EventGroups.Sucker.Push, BePushed);
+        }
+
+        private void OnDisable()
+        {
+            Events.RemoveListener(EventGroups.Sucker.Push, BePushed);
+        }
 
         protected virtual void Start()
         {
             Rb = GetComponent<Rigidbody2D>();
-            Player = GameObject.FindWithTag("Player").transform;
+            Sucker = GameObject.FindWithTag("Player").transform;
         }
 
         protected virtual void Update()
         {
-            _isBeingSuckedIn = InputHandler.Instance.IsSucking;
+            Direction = ((Vector2)(transform.position - Sucker.position)).normalized;
+            _isBeingSuckedIn = SuckerManager.Instance.isSucking;
             if (_isBeingSuckedIn) 
                 BeingSuckedIn();
             else
@@ -31,6 +45,9 @@ namespace Enemy
         // 玩家正在吸时
         protected abstract void BeingSuckedIn();
 
+        // 被推出
+        protected abstract void BePushed();
+        
         // 被吸入了
         protected abstract void Died();
         

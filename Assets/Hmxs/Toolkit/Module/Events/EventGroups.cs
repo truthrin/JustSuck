@@ -9,9 +9,9 @@
         {
         }
 
-        public static class Player
+        public static class Sucker
         {
-            public const string IsSucking = "IsSucking";
+            public const string Push = "Push";
         }
     }
 }
