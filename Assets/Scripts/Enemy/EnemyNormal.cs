@@ -25,7 +25,7 @@ namespace Enemy
             }
             else
             {
-                Rb.AddForce(-Direction * normalAcceleration);
+                Rb.AddForce(-Direction * (normalAcceleration * 2));
             }
         }
 
@@ -38,7 +38,7 @@ namespace Enemy
             }
             else
             {
-                Rb.AddForce(Direction * normalAcceleration);
+                Rb.AddForce(Direction * (normalAcceleration * 2));
             }
         }
 
