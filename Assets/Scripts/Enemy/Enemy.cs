@@ -2,9 +2,19 @@
 
 namespace Enemy
 {
+    [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Enemy : MonoBehaviour
     {
+        protected Rigidbody2D Rb;
+        protected Transform Player;
+        
         private bool _isBeingSuckedIn;
+
+        protected virtual void Start()
+        {
+            Rb = GetComponent<Rigidbody2D>();
+            Player = GameObject.FindWithTag("Player").transform;
+        }
 
         protected virtual void Update()
         {
