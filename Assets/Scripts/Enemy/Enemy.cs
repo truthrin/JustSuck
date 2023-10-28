@@ -1,4 +1,5 @@
-﻿using Hmxs.Toolkit.Module.Events;
+﻿using System;
+using Hmxs.Toolkit.Module.Events;
 using Sucker;
 using UnityEngine;
 
@@ -37,6 +38,23 @@ namespace Enemy
                 BeingSuckedIn();
             else
                 NotBeingSuckedIn();
+            Check();
+        }
+
+        private void Check()
+        {
+            if (Vector2.Distance(Sucker.position, transform.position) > SuckerManager.Instance.deathRadius)
+            {
+                Lost();
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                Died();
+            }
         }
 
         // 玩家没吸时

@@ -65,12 +65,12 @@ namespace Enemy
 
         protected override void Died()
         {
-            throw new System.NotImplementedException();
+            Destroy(gameObject);
         }
 
         protected override void Lost()
         {
-            throw new System.NotImplementedException();
+            Destroy(gameObject);
         }
     }
 }
