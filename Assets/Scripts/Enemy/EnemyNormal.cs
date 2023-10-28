@@ -13,34 +13,48 @@ namespace Enemy
         public float suckedAcceleration;
         public float suckedMaxSpeed;
 
+        [Title("被推")] 
+        public float pushForce;
+
         protected override void NotBeingSuckedIn()
         {
-            var direction = ((Vector2)(transform.position - Player.position)).normalized;
             if (Rb.velocity.magnitude < normalMaxSpeed ||
-                Rb.velocity.x * direction.x < 0 || Rb.velocity.y * direction.y < 0)
+                Rb.velocity.x * Direction.x < 0 || Rb.velocity.y * Direction.y < 0)
             {
-                Rb.AddForce(direction * normalAcceleration);
+                Rb.AddForce(Direction * normalAcceleration);
+            }
+            else
+            {
+                Rb.AddForce(-Direction * (normalAcceleration * 2));
             }
         }
 
         protected override void BeingSuckedIn()
         {
-            var direction = ((Vector2)(Player.position - transform.position)).normalized;
             if (Rb.velocity.magnitude < suckedMaxSpeed ||
-                Rb.velocity.x * direction.x < 0 || Rb.velocity.y * direction.y < 0)
+                Rb.velocity.x * -Direction.x < 0 || Rb.velocity.y * -Direction.y < 0)
             {
-                Rb.AddForce(direction * suckedAcceleration);
+                Rb.AddForce(-Direction * suckedAcceleration);
             }
+            else
+            {
+                Rb.AddForce(Direction * (normalAcceleration * 2));
+            }
+        }
+
+        protected override void BePushed()
+        {
+            Rb.AddForce(Direction * pushForce, ForceMode2D.Impulse);
         }
 
         protected override void Died()
         {
-            throw new System.NotImplementedException();
+            Destroy(gameObject);
         }
 
         protected override void Lost()
         {
-            throw new System.NotImplementedException();
+            Destroy(gameObject);
         }
     }
 }
