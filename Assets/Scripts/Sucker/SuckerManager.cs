@@ -1,5 +1,4 @@
-﻿using System;
-using Hmxs.Toolkit.Base.Singleton;
+﻿using Hmxs.Toolkit.Base.Singleton;
 using Hmxs.Toolkit.Flow.Timer;
 using Hmxs.Toolkit.Module.Events;
 using Sirenix.OdinInspector;
@@ -12,6 +11,8 @@ namespace Sucker
         public float deathRadius;
         public float maxSuckTimeSet;
         public float respirePunishmentTimeSet;
+
+        public GameObject dieParticle;
         
         [ReadOnly] public float suckTimer;
         [ReadOnly] public bool isSucking;
@@ -77,6 +78,8 @@ namespace Sucker
         private void Die()
         {
             _spriteRenderer.enabled = false;
+            var obj = Instantiate(dieParticle, transform.position, Quaternion.identity);
+            Timer.Register(2f, () => Destroy(obj));
         }
         
         private void OnTriggerStay2D(Collider2D other)
