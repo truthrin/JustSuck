@@ -35,9 +35,11 @@ namespace Enemy
         public void Generate(int weaveDataIndex)
         {
             Debug.Log("Weave" + weaveDataIndex);
-            if (weaveDataIndex == enemyWeaveData.Count)
+            if (weaveDataIndex == 5)
             {
                 FlowchartManager.ExecuteBlock("Finish");
+                SuckerManager.Instance.Finish();
+                return;
             }
             var data = enemyWeaveData[weaveDataIndex];
             for (int i = 0; i < data.enemyTimeline.Count; i++)

@@ -102,6 +102,13 @@ namespace Sucker
             Time.timeScale = 0.1f;
             FlowchartManager.ExecuteBlock("Die");
         }
+
+        public void Finish()
+        {
+            _animator.Play("Die");
+            foreach (Transform child in enemyRoot.transform) 
+                Destroy(child.gameObject);
+        }
         
         private void OnTriggerStay2D(Collider2D other)
         {
