@@ -46,15 +46,5 @@ namespace Enemy
         {
             Rb.AddForce(Direction * pushForce, ForceMode2D.Impulse);
         }
-
-        protected override void Died()
-        {
-            Destroy(gameObject);
-        }
-
-        protected override void Lost()
-        {
-            Destroy(gameObject);
-        }
     }
 }

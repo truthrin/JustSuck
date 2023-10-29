@@ -16,7 +16,7 @@ namespace Enemy
     {
         public float time;
 
-        [Range(1,10)]
+        [Range(1,9)]
         public float distance;
 
         public EnemyType type;

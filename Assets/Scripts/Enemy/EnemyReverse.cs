@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Hmxs.Toolkit.Module.Events;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Enemy
@@ -45,16 +46,6 @@ namespace Enemy
         protected override void BePushed()
         {
             Rb.AddForce(Direction * pushForce, ForceMode2D.Impulse);
-        }
-
-        protected override void Died()
-        {
-            Destroy(gameObject);
-        }
-
-        protected override void Lost()
-        {
-            Destroy(gameObject);
         }
     }
 }
