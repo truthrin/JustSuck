@@ -1,5 +1,5 @@
-﻿using System;
-using Hmxs.Toolkit.Module.Events;
+﻿using Hmxs.Toolkit.Module.Events;
+using MoreMountains.Feedbacks;
 using Sucker;
 using UnityEngine;
 
@@ -8,6 +8,13 @@ namespace Enemy
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class Enemy : MonoBehaviour
     {
+        public MMF_Player bounceEffect;
+        public MMF_Player spawnEffect;
+        public MMF_Player suckedEffect;
+        public GameObject particle;
+        
+        public float collisionForce;
+        
         protected Rigidbody2D Rb;
         protected Transform Sucker;
         protected Vector2 Direction;
@@ -28,8 +35,21 @@ namespace Enemy
         {
             Rb = GetComponent<Rigidbody2D>();
             Sucker = GameObject.FindWithTag("Player").transform;
+            bounceEffect.Initialization();
+            spawnEffect.Initialization();
+            suckedEffect.Initialization();
+            
+            spawnEffect.PlayFeedbacks();
+            Instantiate(particle, transform.position, Quaternion.identity, transform);
         }
 
+        private void OnDestroy()
+        {
+            Destroy(particle);
+        }
+
+        private bool _effectTriggered;
+        
         protected virtual void Update()
         {
             Direction = ((Vector2)(transform.position - Sucker.position)).normalized;
@@ -38,22 +58,33 @@ namespace Enemy
                 BeingSuckedIn();
             else
                 NotBeingSuckedIn();
-            Check();
-        }
 
-        private void Check()
-        {
-            if (Vector2.Distance(Sucker.position, transform.position) > SuckerManager.Instance.deathRadius)
+            if (_isBeingSuckedIn && !_effectTriggered)
             {
-                Lost();
+                suckedEffect.PlayFeedbacks();
+                _effectTriggered = true;
+            }
+
+            if (!_isBeingSuckedIn && _effectTriggered)
+            {
+                suckedEffect.PlayFeedbacks();
+                _effectTriggered = false;
             }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
-            {
+            if (other.CompareTag("Player")) 
                 Died();
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.CompareTag("Emeny"))
+            {
+                var direction = ((Vector2)(other.transform.position - transform.position)).normalized;
+                Rb.AddForce(collisionForce * direction, ForceMode2D.Impulse);
+                bounceEffect.PlayFeedbacks();
             }
         }
 
@@ -67,9 +98,20 @@ namespace Enemy
         protected abstract void BePushed();
         
         // 被吸入了
-        protected abstract void Died();
+        protected virtual void Died()
+        {
+            Debug.Log("die");
+            SuckerManager.Instance.getBallEffect.PlayFeedbacks();
+            Events.Trigger(EventGroups.Enemy.CheckNextWeave);
+            Destroy(gameObject);
+        }
         
         // 超出边界了
-        protected abstract void Lost();
+        public virtual void Lost()
+        {
+            Debug.Log("lost");
+            Events.Trigger(EventGroups.General.GameOver);
+            Destroy(gameObject);
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Hmxs.Toolkit.Flow.Timer;
+﻿using System;
+using Hmxs.Toolkit.Flow.Timer;
+using Hmxs.Toolkit.Module.Events;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -21,15 +23,22 @@ namespace Enemy
         public GameObject halo;
         public float attackLoop;
 
+        private Timer _timer;
+        
         protected override void Start()
         {
             base.Start();
-            this.AttachTimer(attackLoop, Attack, isLooped: true);
+            _timer = Timer.Register(attackLoop, Attack, isLooped: true);
+        }
+
+        private void OnDestroy()
+        {
+            Timer.Remove(_timer);
         }
 
         private void Attack()
         {
-            Instantiate(halo, transform.position, Quaternion.identity);
+            Instantiate(halo, transform.position, Quaternion.identity, transform.parent);
         }
 
         protected override void NotBeingSuckedIn()
@@ -61,16 +70,6 @@ namespace Enemy
         protected override void BePushed()
         {
             Rb.AddForce(Direction * pushForce, ForceMode2D.Impulse);
-        }
-
-        protected override void Died()
-        {
-            Destroy(gameObject);
-        }
-
-        protected override void Lost()
-        {
-            Destroy(gameObject);
         }
     }
 }

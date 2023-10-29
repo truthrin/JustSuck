@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b36a2aacdd419590a523fc2df2a88c, type: 3}
+  m_Name: EnemyGenerateData 2
+  m_EditorClassIdentifier: 
+  enemyTimeline:
+  - time: 2.5
+    distance: 3
+    type: 0
+  - time: 2.5
+    distance: 3
+    type: 0
+  - time: 2.5
+    distance: 3
+    type: 1
+  - time: 7.5
+    distance: 3.7
+    type: 1
+  - time: 9
+    distance: 3.7
+    type: 1
+  - time: 10
+    distance: 3.7
+    type: 1
+  - time: 10.5
+    distance: 3.7
+    type: 0
+  - time: 12
+    distance: 3.7
+    type: 0
+  - time: 16
+    distance: 3
+    type: 1
+  - time: 18
+    distance: 4
+    type: 0
+  - time: 19
+    distance: 4
+    type: 0
+  - time: 21
+    distance: 3.5
+    type: 1
+  - time: 23
+    distance: 3.5
+    type: 1
+  - time: 28
+    distance: 3
+    type: 0
+  - time: 28
+    distance: 4
+    type: 1
+  - time: 28
+    distance: 3.5
+    type: 1
+  - time: 29
+    distance: 3.5
+    type: 0
+  - time: 29
+    distance: 2.5
+    type: 0
+  - time: 32
+    distance: 3
+    type: 0
+  - time: 32
+    distance: 3
+    type: 2
+  - time: 32
+    distance: 3
+    type: 1
+  - time: 35
+    distance: 3.5
+    type: 1
+  - time: 36
+    distance: 4
+    type: 0
+  - time: 36
+    distance: 4
+    type: 1
+  - time: 38
+    distance: 3.5
+    type: 2
+  - time: 40
+    distance: 2.5
+    type: 1
+  - time: 43
+    distance: 4
+    type: 0
+  - time: 43
+    distance: 4
+    type: 0
+  - time: 43
+    distance: 3
+    type: 1
+  - time: 43
+    distance: 3
+    type: 1
+  - time: 48
+    distance: 4.5
+    type: 0
+  - time: 48
+    distance: 4.5
+    type: 2
+  - time: 50
+    distance: 5
+    type: 0
+  - time: 51
+    distance: 5
+    type: 1
+  - time: 52
+    distance: 4.7
+    type: 2
+  - time: 52
+    distance: 3
+    type: 0
+  - time: 52
+    distance: 3
+    type: 0

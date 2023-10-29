@@ -7,11 +7,17 @@
     {
         public static class General
         {
+            public const string GameOver = "GameOver";
         }
 
         public static class Sucker
         {
             public const string Push = "Push";
+        }
+        
+        public static class Enemy
+        {
+            public const string CheckNextWeave = "CheckNextWeave";
         }
     }
 }

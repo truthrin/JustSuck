@@ -112,7 +112,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3402748556645410580}
@@ -182,8 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71cf7b8292a04dc6b3d3aff39903d1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expandSpeed: 0.8
-  maxScale: 12
 --- !u!60 &6700925140959107448
 PolygonCollider2D:
   m_ObjectHideFlags: 0
