@@ -48,6 +48,17 @@ public partial class @InputControls: IInputActionCollection2, IDisposable
                     ""action"": ""Suck"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e8157d9d-8fc6-4224-9b5b-3e0f9a6497cc"",
+                    ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Suck"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
