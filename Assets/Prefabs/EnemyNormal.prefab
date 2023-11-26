@@ -11636,7 +11636,7 @@ GameObject:
   - component: {fileID: 6968658267715441302}
   m_Layer: 0
   m_Name: EnemyNormal
-  m_TagString: Emeny
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17504,14 +17504,14 @@ MonoBehaviour:
             serializedVersion: 2
             m_Curve:
             - serializedVersion: 3
-              time: 0.0037593986
-              value: 0.68959093
-              inSlope: 0
-              outSlope: 0
+              time: 0.000014133286
+              value: 0.70043904
+              inSlope: -0.039941844
+              outSlope: -0.039941844
               tangentMode: 0
               weightedMode: 0
               inWeight: 0
-              outWeight: 0
+              outWeight: 0.37548843
             - serializedVersion: 3
               time: 0.123451956
               value: 0.8277634

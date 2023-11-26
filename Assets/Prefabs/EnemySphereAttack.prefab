@@ -755,7 +755,7 @@ MonoBehaviour:
         AnimateScaleTarget: {fileID: 5153428653370659087}
         AnimateScaleDuration: 1
         RemapCurveZero: 0
-        RemapCurveOne: 0.7
+        RemapCurveOne: 1
         Offset: 0
         AnimateX: 1
         AnimateScaleTweenX:
@@ -783,8 +783,8 @@ MonoBehaviour:
               inWeight: 0.33333334
               outWeight: 0.52841544
             - serializedVersion: 3
-              time: 1.0075996
-              value: 0.7012849
+              time: 0.99244773
+              value: 0.7033554
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -1770,7 +1770,7 @@ MonoBehaviour:
               outWeight: 0.33333334
             - serializedVersion: 3
               time: 0.5
-              value: 0.7120984
+              value: 0.7066243
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -2763,8 +2763,8 @@ MonoBehaviour:
               inWeight: 0.9733055
               outWeight: 0.33333334
             - serializedVersion: 3
-              time: 0.99583334
-              value: 0.69493943
+              time: 0.99957705
+              value: 0.7009993
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -2811,7 +2811,7 @@ MonoBehaviour:
               outWeight: 0.23973553
             - serializedVersion: 3
               time: 0.9970175
-              value: 0.7000213
+              value: 0.70063525
               inSlope: 0
               outSlope: 0
               tangentMode: 0
@@ -27408,7 +27408,7 @@ GameObject:
   - component: {fileID: 6683988167251584466}
   m_Layer: 0
   m_Name: EnemySphereAttack
-  m_TagString: Emeny
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

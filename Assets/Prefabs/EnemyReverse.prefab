@@ -17374,7 +17374,7 @@ MonoBehaviour:
         AnimateScaleTarget: {fileID: 3153570817771114673}
         AnimateScaleDuration: 1
         RemapCurveZero: 0
-        RemapCurveOne: 0.7
+        RemapCurveOne: 1
         Offset: 0
         AnimateX: 1
         AnimateScaleTweenX:
@@ -17602,7 +17602,7 @@ GameObject:
   - component: {fileID: 7912776495738792599}
   m_Layer: 0
   m_Name: EnemyReverse
-  m_TagString: Emeny
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

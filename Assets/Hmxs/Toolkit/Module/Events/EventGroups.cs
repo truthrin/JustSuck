@@ -14,10 +14,5 @@
         {
             public const string Push = "Push";
         }
-        
-        public static class Enemy
-        {
-            public const string CheckNextWeave = "CheckNextWeave";
-        }
     }
 }

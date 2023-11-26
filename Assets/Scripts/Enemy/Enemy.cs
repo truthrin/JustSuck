@@ -1,7 +1,10 @@
-﻿using Hmxs.Toolkit.Module.Events;
+﻿using Fungus;
+using Hmxs.Toolkit.Flow.FungusTools;
+using Hmxs.Toolkit.Module.Events;
 using MoreMountains.Feedbacks;
 using Sucker;
 using UnityEngine;
+using Collision2D = UnityEngine.Collision2D;
 
 namespace Enemy
 {
@@ -43,10 +46,7 @@ namespace Enemy
             Instantiate(particle, transform.position, Quaternion.identity, transform);
         }
 
-        private void OnDestroy()
-        {
-            Destroy(particle);
-        }
+        private void OnDestroy() => Destroy(particle);
 
         private bool _effectTriggered;
         
@@ -80,7 +80,7 @@ namespace Enemy
 
         private void OnCollisionEnter2D(Collision2D other)
         {
-            if (other.gameObject.CompareTag("Emeny"))
+            if (other.gameObject.CompareTag("Enemy"))
             {
                 var direction = ((Vector2)(other.transform.position - transform.position)).normalized;
                 Rb.AddForce(collisionForce * direction, ForceMode2D.Impulse);
@@ -100,18 +100,18 @@ namespace Enemy
         // 被吸入了
         protected virtual void Died()
         {
-            Debug.Log("die");
             SuckerManager.Instance.getBallEffect.PlayFeedbacks();
-            Events.Trigger(EventGroups.Enemy.CheckNextWeave);
+            EnemyGenerator.Instance.Check();
             Destroy(gameObject);
         }
         
         // 超出边界了
         public virtual void Lost()
         {
-            Debug.Log("lost");
+            var lookPoint = GameObject.Find("LookPoint").transform;
+            lookPoint.position = transform.position * 0.3f;
+            FlowchartManager.ExecuteBlock("Lost");
             Events.Trigger(EventGroups.General.GameOver);
-            Destroy(gameObject);
         }
     }
 }

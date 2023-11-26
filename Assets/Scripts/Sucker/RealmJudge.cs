@@ -6,7 +6,7 @@ namespace Sucker
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Emeny"))
+            if (other.CompareTag("Enemy"))
             {
                 other.gameObject.GetComponent<Enemy.Enemy>().Lost();
             }

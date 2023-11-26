@@ -2,7 +2,6 @@
 using Hmxs.Toolkit.Base.Singleton;
 using Hmxs.Toolkit.Flow.FungusTools;
 using Hmxs.Toolkit.Flow.Timer;
-using Hmxs.Toolkit.Module.Events;
 using Sirenix.OdinInspector;
 using Sucker;
 using UnityEngine;
@@ -19,28 +18,22 @@ namespace Enemy
 
         [ReadOnly] public List<Timer> timers;
         [ReadOnly] public int weaveIndex;
-        private bool _weaveFinished;
-        [ShowInInspector] private bool _allEnemyDied;
-
-        private void OnEnable()
-        {
-            Events.AddListener(EventGroups.Enemy.CheckNextWeave, Check);
-        }
-
-        private void OnDisable()
-        {
-            Events.RemoveListener(EventGroups.Enemy.CheckNextWeave, Check);
-        }
+        [ReadOnly] public bool weaveGenerateFinished;
+        [ReadOnly] public bool allEnemyDied;
 
         public void Generate(int weaveDataIndex)
         {
-            Debug.Log("Weave" + weaveDataIndex);
-            if (weaveDataIndex == 5)
+            if (weaveDataIndex == enemyWeaveData.Count)
             {
+                Debug.Log("Finish");
                 FlowchartManager.ExecuteBlock("Finish");
                 SuckerManager.Instance.Finish();
                 return;
             }
+            Debug.Log("Weave" + weaveDataIndex);
+            weaveGenerateFinished = false;
+            allEnemyDied = false;
+            ClearTimers();
             var data = enemyWeaveData[weaveDataIndex];
             for (int i = 0; i < data.enemyTimeline.Count; i++)
             {
@@ -53,7 +46,7 @@ namespace Enemy
                     Instantiate(enemies[enemy.type], pos, Quaternion.identity, enemyRoot);
                     if (index == data.enemyTimeline.Count - 1)
                     {
-                        _weaveFinished = true;
+                        weaveGenerateFinished = true;
                     }
                 });
                 timers.Add(timer);
@@ -66,29 +59,28 @@ namespace Enemy
             {
                 timer.Remove();
             }
-
             timers.Clear();
         }
 
         private void Start()
         {
+            Debug.Log(enemyWeaveData.Count);
             Generate(weaveIndex);
         }
 
-        private void Check()
+        public void Check()
         {
-            _allEnemyDied = enemyRoot.GetComponentsInChildren<Enemy>().Length <= 1;
+            allEnemyDied = enemyRoot.GetComponentsInChildren<Enemy>().Length <= 1;
             
-            if (_weaveFinished && _allEnemyDied && !SuckerManager.Instance.hasDied)
+            if (weaveGenerateFinished && allEnemyDied && !SuckerManager.Instance.hasDied)
             {
                 Timer.Register(3f, NextWeave);
             }
         }
-        public void NextWeave()
+
+        private void NextWeave()
         {
             Debug.Log("NextWeave");
-            _allEnemyDied = false;
-            _weaveFinished = false;
             weaveIndex++;
             Generate(weaveIndex);
         }

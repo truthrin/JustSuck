@@ -28,7 +28,7 @@ namespace Enemy
         protected override void Start()
         {
             base.Start();
-            _timer = Timer.Register(attackLoop, Attack, isLooped: true);
+            _timer = Timer.Register(attackLoop, Attack, isLooped: true, owner: this);
         }
 
         private void OnDestroy()

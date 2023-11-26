@@ -23,13 +23,14 @@ namespace Sucker
         
         [ReadOnly] public float suckTimer;
         [ReadOnly] public bool isSucking;
-        [ReadOnly] public bool hasDied;
-        
-        private Animator _animator;
+        [ReadOnly] public bool hasDied = false;
+
+        private SpriteRenderer _spriteRenderer;
+        private Collider2D _collider;
         private bool _canPush = false;
         private bool _canRespire = true;
-        
-                
+        private bool _canRespawn = false;
+
         private void OnEnable()
         {
             Events.AddListener(EventGroups.General.GameOver, Die);
@@ -44,7 +45,8 @@ namespace Sucker
         {
             _canPush = false;
             suckTimer = maxSuckTimeSet;
-            _animator = GetComponent<Animator>();
+            _collider = GetComponent<Collider2D>();
+            _spriteRenderer = GetComponent<SpriteRenderer>();
             getBallEffect.Initialization();
             peakEffect.Initialization();
             defendEffect.Initialization();
@@ -52,11 +54,20 @@ namespace Sucker
 
         private void Update()
         {
+            if (_canRespawn)
+            {
+                if (InputHandler.Instance.IsSucking)
+                {
+                    _canRespawn = false;
+                    Respawn();
+                }
+                return;
+            }
             if (!_canRespire) return;
             if (InputHandler.Instance.IsSucking)
             {
                 // 按着空格
-                if (suckTimer > 0)
+                if (suckTimer >= 0)
                 {
                     // 正常吸
                     _canPush = true;
@@ -97,7 +108,10 @@ namespace Sucker
 
         private void Die()
         {
-            _animator.Play("Die");
+            Timer.Register(2f, () => _canRespawn = true, useRealTime: true);
+            hasDied = true;
+            _spriteRenderer.enabled = false;
+            _collider.enabled = false;
             Instantiate(dieParticle, transform.position, Quaternion.identity);
             Time.timeScale = 0.1f;
             FlowchartManager.ExecuteBlock("Die");
@@ -105,7 +119,8 @@ namespace Sucker
 
         public void Finish()
         {
-            _animator.Play("Die");
+            _spriteRenderer.enabled = false;
+            _collider.enabled = false;
             foreach (Transform child in enemyRoot.transform) 
                 Destroy(child.gameObject);
         }
@@ -114,7 +129,6 @@ namespace Sucker
         {
             if (other.CompareTag("Bullet") && !isSucking && !hasDied)
             {
-                hasDied = true;
                 Events.Trigger(EventGroups.General.GameOver);
             }
 
@@ -126,21 +140,30 @@ namespace Sucker
 
         public void Respawn()
         {
+            hasDied = false;
             Time.timeScale = 1;
             foreach (Transform child in enemyRoot.transform) 
                 Destroy(child.gameObject);
             FlowchartManager.ExecuteBlock("Respawn");
-            hasDied = false;
-            _canRespire = true;
-            suckTimer = maxSuckTimeSet;
-            _animator.Play("Respawn");
-        }
 
-        public void ReStart()
-        {
-            Debug.Log("Restart");
-            EnemyGenerator.Instance.ClearTimers();
-            EnemyGenerator.Instance.Generate(EnemyGenerator.Instance.weaveIndex);
+            _spriteRenderer.enabled = true;
+            var color = _spriteRenderer.color;
+            color.a = 0;
+            _spriteRenderer.color = color;
+            Timer.Register(1f,
+                onComplete: () =>
+                {
+                    _collider.enabled = true;
+                    _canRespire = true;
+                    suckTimer = maxSuckTimeSet;
+                    Debug.Log("Restart");
+                    EnemyGenerator.Instance.Generate(EnemyGenerator.Instance.weaveIndex);
+                },
+                onUpdate: t =>
+                {
+                    color.a = t;
+                    _spriteRenderer.color = color;
+                });
         }
     }
 }
