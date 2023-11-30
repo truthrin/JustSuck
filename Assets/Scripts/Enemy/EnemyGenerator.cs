@@ -41,7 +41,7 @@ namespace Enemy
                 var index = i;
                 var timer = Timer.Register(enemy.time, () =>
                 {
-                    var randAng = Random.Range(0f, Mathf.PI);
+                    var randAng = Random.Range(0f,2 * Mathf.PI);
                     var pos = new Vector2(Mathf.Cos(randAng), Mathf.Sin(randAng)) * enemy.distance;
                     Instantiate(enemies[enemy.type], pos, Quaternion.identity, enemyRoot);
                     if (index == data.enemyTimeline.Count - 1)
