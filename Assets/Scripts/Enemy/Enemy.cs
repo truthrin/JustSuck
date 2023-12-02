@@ -110,8 +110,7 @@ namespace Enemy
         {
             var lookPoint = GameObject.Find("LookPoint").transform;
             lookPoint.position = transform.position * 0.3f;
-            FlowchartManager.ExecuteBlock("Lost");
-            Events.Trigger(EventGroups.General.GameOver);
+            Events.Trigger(EventGroups.General.GameOver, FailedType.Lost);
         }
     }
 }

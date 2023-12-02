@@ -1,4 +1,5 @@
-﻿using Enemy;
+﻿using System;
+using Enemy;
 using Hmxs.Toolkit.Base.Singleton;
 using Hmxs.Toolkit.Flow.FungusTools;
 using Hmxs.Toolkit.Flow.Timer;
@@ -9,6 +10,12 @@ using UnityEngine;
 
 namespace Sucker
 {
+    public enum FailedType
+    {
+        BeAttack,
+        Lost
+    }
+
     public class SuckerManager : SingletonMono<SuckerManager>
     {
         public MMF_Player getBallEffect;
@@ -33,12 +40,12 @@ namespace Sucker
 
         private void OnEnable()
         {
-            Events.AddListener(EventGroups.General.GameOver, Die);
+            Events.AddListener<FailedType>(EventGroups.General.GameOver, Die);
         }
 
         private void OnDisable()
         {
-            Events.RemoveListener(EventGroups.General.GameOver, Die);
+            Events.RemoveListener<FailedType>(EventGroups.General.GameOver, Die);
         }
 
         private void Start()
@@ -106,7 +113,7 @@ namespace Sucker
             this.AttachTimer(respirePunishmentTimeSet, () => _canRespire = true);
         }
 
-        private void Die()
+        private void Die(FailedType type)
         {
             Timer.Register(2f, () => _canRespawn = true, useRealTime: true);
             hasDied = true;
@@ -114,7 +121,17 @@ namespace Sucker
             _collider.enabled = false;
             Instantiate(dieParticle, transform.position, Quaternion.identity);
             Time.timeScale = 0.1f;
-            FlowchartManager.ExecuteBlock("Die");
+            switch (type)
+            {
+                case FailedType.BeAttack:
+                    FlowchartManager.ExecuteBlock("Die");
+                    break;
+                case FailedType.Lost:
+                    FlowchartManager.ExecuteBlock("Lost");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
 
         public void Finish()
@@ -129,7 +146,7 @@ namespace Sucker
         {
             if (other.CompareTag("Bullet") && !isSucking && !hasDied)
             {
-                Events.Trigger(EventGroups.General.GameOver);
+                Events.Trigger(EventGroups.General.GameOver, FailedType.BeAttack);
             }
 
             if (other.CompareTag("Bullet") && isSucking && !hasDied)
@@ -138,7 +155,7 @@ namespace Sucker
             }
         }
 
-        public void Respawn()
+        private void Respawn()
         {
             hasDied = false;
             Time.timeScale = 1;
