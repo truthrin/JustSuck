@@ -12,14 +12,32 @@ namespace Enemy
 {
     public class EnemyGenerator : SingletonMono<EnemyGenerator>
     {
-        [InfoBox("Enemy Time Line Data")] public List<EnemyGenerateData> enemyWeaveData = new();
-        [InfoBox("Enemy Type")] public SerializedDictionary<EnemyType, GameObject> enemies = new();
+        [Title("Enemy Time Line Data")]
+        public List<EnemyGenerateData> enemyWeaveData = new();
+        [Title("Enemy Type")]
+        public SerializedDictionary<EnemyType, GameObject> enemies = new();
+        [Title("Reference")]
         public Transform enemyRoot;
+        public GameObject celebrateHalo;
+        public ProgressingCircle progressingCircle;
 
+        [Title("Info")]
         [ReadOnly] public List<Timer> timers;
         [ReadOnly] public int weaveIndex;
         [ReadOnly] public bool weaveGenerateFinished;
         [ReadOnly] public bool allEnemyDied;
+        [ReadOnly] public int enemyDiedAmount;
+        [ReadOnly] public int allEnemyAmount;
+
+        [Button]
+        private void CountEnemyAmount()
+        {
+            allEnemyAmount = 0;
+            foreach (var enemyGenerateData in enemyWeaveData)
+                allEnemyAmount += enemyGenerateData.enemyTimeline.Count;
+            Debug.Log("Enemy Weave Amount:  " + enemyWeaveData.Count);
+            Debug.Log("Enemy Amount:        " + allEnemyAmount);
+        }
 
         public void Generate(int weaveDataIndex)
         {
@@ -64,7 +82,7 @@ namespace Enemy
 
         private void Start()
         {
-            Debug.Log(enemyWeaveData.Count);
+            CountEnemyAmount();
             Generate(weaveIndex);
         }
 
@@ -74,7 +92,9 @@ namespace Enemy
             
             if (weaveGenerateFinished && allEnemyDied && !SuckerManager.Instance.hasDied)
             {
-                Timer.Register(3f, NextWeave);
+                Instantiate(celebrateHalo);
+                progressingCircle.UpdateProgressingCircle();
+                Timer.Register(4f, NextWeave);
             }
         }
 

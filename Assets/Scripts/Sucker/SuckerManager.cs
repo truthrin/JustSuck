@@ -32,7 +32,8 @@ namespace Sucker
         [ReadOnly] public bool isSucking;
         [ReadOnly] public bool hasDied = false;
 
-        private SpriteRenderer _spriteRenderer;
+        public SpriteRenderer haloSpriteRenderer;
+        public SpriteRenderer circleSpriteRenderer;
         private Collider2D _collider;
         private bool _canPush = false;
         private bool _canRespire = true;
@@ -53,7 +54,7 @@ namespace Sucker
             _canPush = false;
             suckTimer = maxSuckTimeSet;
             _collider = GetComponent<Collider2D>();
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            // _spriteRenderer = GetComponent<SpriteRenderer>();
             getBallEffect.Initialization();
             peakEffect.Initialization();
             defendEffect.Initialization();
@@ -117,7 +118,8 @@ namespace Sucker
         {
             Timer.Register(2f, () => _canRespawn = true, useRealTime: true);
             hasDied = true;
-            _spriteRenderer.enabled = false;
+            haloSpriteRenderer.enabled = false;
+            circleSpriteRenderer.enabled = false;
             _collider.enabled = false;
             Instantiate(dieParticle, transform.position, Quaternion.identity);
             Time.timeScale = 0.1f;
@@ -136,7 +138,8 @@ namespace Sucker
 
         public void Finish()
         {
-            _spriteRenderer.enabled = false;
+            haloSpriteRenderer.enabled = false;
+            circleSpriteRenderer.enabled = false;
             _collider.enabled = false;
             foreach (Transform child in enemyRoot.transform) 
                 Destroy(child.gameObject);
@@ -163,10 +166,13 @@ namespace Sucker
                 Destroy(child.gameObject);
             FlowchartManager.ExecuteBlock("Respawn");
 
-            _spriteRenderer.enabled = true;
-            var color = _spriteRenderer.color;
+            haloSpriteRenderer.enabled = true;
+            circleSpriteRenderer.enabled = true;
+
+            var color = haloSpriteRenderer.color;
             color.a = 0;
-            _spriteRenderer.color = color;
+            haloSpriteRenderer.color = color;
+            circleSpriteRenderer.color = color;
             Timer.Register(1f,
                 onComplete: () =>
                 {
@@ -179,7 +185,8 @@ namespace Sucker
                 onUpdate: t =>
                 {
                     color.a = t;
-                    _spriteRenderer.color = color;
+                    haloSpriteRenderer.color = color;
+                    circleSpriteRenderer.color = color;
                 });
         }
     }
