@@ -109,7 +109,7 @@ namespace Enemy
         public virtual void Lost()
         {
             var lookPoint = GameObject.Find("LookPoint").transform;
-            lookPoint.position = transform.position * 0.3f;
+            lookPoint.position = transform.position * 0.4f;
             Events.Trigger(EventGroups.General.GameOver, FailedType.Lost);
         }
     }

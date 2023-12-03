@@ -13,39 +13,72 @@ MonoBehaviour:
   m_Name: EnemyGenerateData 1
   m_EditorClassIdentifier: 
   enemyTimeline:
-  - time: 1
-    distance: 2.5
+  - time: 0
+    distance: 5
+    type: 0
+  - time: 0
+    distance: 5
+    type: 0
+  - time: 0
+    distance: 5
     type: 0
   - time: 3
     distance: 3
     type: 0
-  - time: 6
-    distance: 3.5
-    type: 0
-  - time: 9
-    distance: 3.5
-    type: 1
-  - time: 15
-    distance: 3.5
-    type: 0
-  - time: 21
-    distance: 3.75
-    type: 1
-  - time: 24
+  - time: 3
     distance: 3
     type: 0
-  - time: 24
-    distance: 4
+  - time: 3
+    distance: 3
     type: 0
-  - time: 31
-    distance: 3.5
-    type: 2
-  - time: 36
-    distance: 3.5
+  - time: 3
+    distance: 5
+    type: 0
+  - time: 3
+    distance: 5
+    type: 0
+  - time: 6
+    distance: 2.5
     type: 1
-  - time: 36
-    distance: 3.5
-    type: 2
-  - time: 38
-    distance: 4
+  - time: 6
+    distance: 2.5
+    type: 1
+  - time: 6
+    distance: 2.5
+    type: 1
+  - time: 7
+    distance: 6.2
+    type: 0
+  - time: 7
+    distance: 6.2
+    type: 0
+  - time: 7
+    distance: 6.2
+    type: 0
+  - time: 12
+    distance: 2.5
+    type: 0
+  - time: 12
+    distance: 2.5
+    type: 0
+  - time: 12
+    distance: 2.5
+    type: 0
+  - time: 13
+    distance: 6.2
+    type: 1
+  - time: 13
+    distance: 6.2
+    type: 1
+  - time: 13
+    distance: 6.2
+    type: 1
+  - time: 14
+    distance: 6.5
+    type: 0
+  - time: 14
+    distance: 6.5
+    type: 0
+  - time: 14
+    distance: 6.5
     type: 0

@@ -16,3 +16,48 @@ MonoBehaviour:
   - time: 1
     distance: 3
     type: 0
+  - time: 6
+    distance: 4
+    type: 0
+  - time: 6
+    distance: 4
+    type: 0
+  - time: 6
+    distance: 4
+    type: 0
+  - time: 9
+    distance: 5
+    type: 0
+  - time: 9
+    distance: 5
+    type: 0
+  - time: 9
+    distance: 5
+    type: 0
+  - time: 11.5
+    distance: 2
+    type: 0
+  - time: 11.5
+    distance: 2
+    type: 0
+  - time: 13
+    distance: 4
+    type: 0
+  - time: 13
+    distance: 4
+    type: 0
+  - time: 13
+    distance: 4
+    type: 0
+  - time: 15
+    distance: 6
+    type: 0
+  - time: 15
+    distance: 6
+    type: 0
+  - time: 15
+    distance: 6
+    type: 0
+  - time: 15
+    distance: 6
+    type: 0

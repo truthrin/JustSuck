@@ -84,26 +84,28 @@ namespace Sucker
                 else
                 {
                     // 吸过头了
+                    Debug.Log("SuckToMuch");
                     _canPush = false;
-                    Events.Trigger(EventGroups.Sucker.Push);
-                    peakEffect.PlayFeedbacks();
                     isSucking = false;
                     RespirePunishment();
+                    Events.Trigger(EventGroups.Sucker.Push);
+                    peakEffect.PlayFeedbacks();
                 }
             }
             else
             {
                 // 没按着空格时
                 isSucking = false;
-                if (suckTimer < maxSuckTimeSet)
+                if (suckTimer <= maxSuckTimeSet)
                     // 回复吸气条
                     suckTimer += Time.deltaTime;
-
                 if (_canPush)
                 {
+                    Debug.Log("SuckPush");
                     _canPush = false;
                     Events.Trigger(EventGroups.Sucker.Push);
                 }
+                _canPush = false;
             }
         }
 

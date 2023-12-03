@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Hmxs.Toolkit.Base.Singleton;
 using Hmxs.Toolkit.Flow.FungusTools;
 using Hmxs.Toolkit.Flow.Timer;
@@ -68,13 +69,17 @@ namespace Enemy
             Generate(weaveIndex);
         }
 
-        public void Check()
+        private void Update()
         {
             allEnemyDied = enemyRoot.GetComponentsInChildren<Enemy>().Length <= 1;
-            
+        }
+
+        public void Check()
+        {
             if (weaveGenerateFinished && allEnemyDied && !SuckerManager.Instance.hasDied)
             {
-                Timer.Register(3f, NextWeave);
+                FlowchartManager.ExecuteBlock("SuckComplete");
+                Timer.Register(5f, NextWeave);
             }
         }
 
