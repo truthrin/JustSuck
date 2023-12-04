@@ -92,7 +92,7 @@ MonoBehaviour:
     distance: 3
     type: 1
   - time: 15.5
-    distance: 6.5
+    distance: 6
     type: 2
   - time: 24
     distance: 3.5
@@ -104,10 +104,10 @@ MonoBehaviour:
     distance: 3.5
     type: 1
   - time: 24.5
-    distance: 6.5
+    distance: 6
     type: 2
   - time: 24.5
-    distance: 6.5
+    distance: 6
     type: 2
   - time: 33.5
     distance: 1.5

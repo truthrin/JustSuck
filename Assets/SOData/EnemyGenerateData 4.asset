@@ -32,13 +32,13 @@ MonoBehaviour:
     distance: 4
     type: 0
   - time: 7
-    distance: 6.5
+    distance: 6
     type: 1
   - time: 7
-    distance: 6.5
+    distance: 6
     type: 1
   - time: 7
-    distance: 6.5
+    distance: 6
     type: 1
   - time: 9
     distance: 2
@@ -71,19 +71,19 @@ MonoBehaviour:
     distance: 1.5
     type: 1
   - time: 18
-    distance: 6.5
+    distance: 6
     type: 1
   - time: 18
-    distance: 6.5
+    distance: 6
     type: 1
   - time: 18
-    distance: 6.5
+    distance: 6
     type: 1
   - time: 18
-    distance: 6.5
+    distance: 6
     type: 1
   - time: 18
-    distance: 6.5
+    distance: 6
     type: 1
   - time: 20
     distance: 1.5

@@ -47,13 +47,13 @@ MonoBehaviour:
     distance: 2.5
     type: 1
   - time: 7
-    distance: 6.2
+    distance: 5.5
     type: 0
   - time: 7
-    distance: 6.2
+    distance: 5.5
     type: 0
   - time: 7
-    distance: 6.2
+    distance: 5.5
     type: 0
   - time: 12
     distance: 2.5
@@ -65,20 +65,20 @@ MonoBehaviour:
     distance: 2.5
     type: 0
   - time: 13
-    distance: 6.2
+    distance: 5.5
     type: 1
   - time: 13
-    distance: 6.2
+    distance: 5.5
     type: 1
   - time: 13
-    distance: 6.2
+    distance: 5.5
     type: 1
   - time: 14
-    distance: 6.5
+    distance: 6
     type: 0
   - time: 14
-    distance: 6.5
+    distance: 6
     type: 0
   - time: 14
-    distance: 6.5
+    distance: 6
     type: 0

@@ -260,7 +260,7 @@ MonoBehaviour:
   enemyRoot: {fileID: 267450930}
   timers: []
   weaveIndex: 0
-  weaveGenerateFinished: 0
+  weaveRegisterFinished: 0
   allEnemyDied: 0
 --- !u!1 &333743310
 GameObject:
@@ -3136,7 +3136,7 @@ MonoBehaviour:
   getBallEffect: {fileID: 7819844438210866293}
   peakEffect: {fileID: 8425212640794304986}
   defendEffect: {fileID: 2892071436591947418}
-  maxSuckTimeSet: 2.7
+  maxSuckTimeSet: 3
   respirePunishmentTimeSet: 1
   dieParticle: {fileID: 1042884271746948172, guid: e98ddd8770da00a4fb81994bb6f97a77, type: 3}
   enemyRoot: {fileID: 267450929}
