@@ -101,7 +101,6 @@ namespace Enemy
         protected virtual void Died()
         {
             SuckerManager.Instance.getBallEffect.PlayFeedbacks();
-            EnemyGenerator.Instance.Check();
             Destroy(gameObject);
         }
         

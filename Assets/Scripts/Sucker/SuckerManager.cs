@@ -34,7 +34,7 @@ namespace Sucker
 
         private SpriteRenderer _spriteRenderer;
         private Collider2D _collider;
-        private bool _canPush = false;
+        [ShowInInspector] [ReadOnly] private bool _canPush = false;
         private bool _canRespire = true;
         private bool _canRespawn = false;
 
@@ -101,7 +101,7 @@ namespace Sucker
                     suckTimer += Time.deltaTime;
                 if (_canPush)
                 {
-                    Debug.Log("SuckPush");
+                    //Debug.Log("SuckPush");
                     _canPush = false;
                     Events.Trigger(EventGroups.Sucker.Push);
                 }
